@@ -6,7 +6,7 @@
 /*   By: ssnowbir <ssnowbir@student.21.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 19:36:12 by ssnowbir          #+#    #+#             */
-/*   Updated: 2021/02/01 19:40:32 by ssnowbir         ###   ########.fr       */
+/*   Updated: 2021/02/02 16:33:50 by ssnowbir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include <iostream>
+class Form;
 #include "Form.hpp"
+#include <cstdlib>
 
 class RobotomyRequestForm: public Form
 {
 private:
-	/* data */
+	std::string				_target;
+								RobotomyRequestForm();
 public:
-		RobotomyRequestForm(std::string const & src);
-        RobotomyRequestForm();
-        virtual ~RobotomyRequestForm();
+							RobotomyRequestForm(RobotomyRequestForm const & src);
+       						RobotomyRequestForm(std::string target);
+
+        					~RobotomyRequestForm();
+		void				Action() const;
         RobotomyRequestForm &operator=(const RobotomyRequestForm& o);
 };
 
-RobotomyRequestForm::RobotomyRequestForm()
-{
-	
-}
-
-RobotomyRequestForm::~RobotomyRequestForm()
-{
-}
-
+// std::ostream& 				operator<<(std::ostream& o, Form const &src);
 
 #endif

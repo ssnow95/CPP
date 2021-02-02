@@ -6,7 +6,7 @@
 /*   By: ssnowbir <ssnowbir@student.21.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:20:03 by ssnowbir          #+#    #+#             */
-/*   Updated: 2021/02/01 18:51:37 by ssnowbir         ###   ########.fr       */
+/*   Updated: 2021/02/02 17:38:47 by ssnowbir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,33 @@ const char   *Bureaucrat::GradeTooHighException::what() const throw()
 	return ("Grade is too high.");
 }
 
+const char   *Bureaucrat::errorForm::what() const throw()
+{
+	return ("Form cannot be used.");
+}
+
 const char   *Bureaucrat::incorrect_parametr::what() const throw()
 {
 	return ("parametr is null");
 }
 
-void Bureaucrat::signForm(Form sign)
+void Bureaucrat::signForm(Form &sign)
 {
 	if(&sign == nullptr)
 		throw Bureaucrat::incorrect_parametr();
+	sign.beSigned(*this);
 	if(sign.getSigned() == true)
 		std::cout <<this->_name << " signs form: " << sign.getName() << std::endl;	
 	else
-		std::cout <<this->_name << "  cannot sign form: " << sign.getName() << " because " <<this->_name << "doesn't have enough grade" << std::endl;
+		std::cout <<this->_name << "  cannot sign form: " << sign.getName() << " ,because " <<this->_name << " doesn't have enough grade" << std::endl;
+}
+
+void Bureaucrat::executeForm (Form const & form)
+{
+	if(&form == nullptr)
+		throw Bureaucrat::incorrect_parametr();
+	else
+	{
+		form.execute(*this);
+	}
 }

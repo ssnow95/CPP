@@ -6,7 +6,7 @@
 /*   By: ssnowbir <ssnowbir@student.21.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:19:12 by ssnowbir          #+#    #+#             */
-/*   Updated: 2021/02/01 18:14:58 by ssnowbir         ###   ########.fr       */
+/*   Updated: 2021/02/02 17:38:11 by ssnowbir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,16 @@ public:
 						{
 							const char    *what() const throw();
 						};
+						class errorForm: public std::exception
+						{
+							const char    *what() const throw();
+						};
 						std::string getName() const;
 						int getGrade() const;
 						void gradeUp();
 						void gradeDown();
-						void signForm(Form sign);
+						void signForm(Form &sign);
+						void executeForm (Form const & form);
 											
 };
 

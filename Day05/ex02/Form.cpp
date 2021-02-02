@@ -6,7 +6,7 @@
 /*   By: ssnowbir <ssnowbir@student.21.ru>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:16:47 by ssnowbir          #+#    #+#             */
-/*   Updated: 2021/02/01 18:50:45 by ssnowbir         ###   ########.fr       */
+/*   Updated: 2021/02/02 17:39:21 by ssnowbir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Form::Form(std::string name, int grade_rec_sign, int grade_rec_exec): _name(name
 	if(_grade_rec_sign > 150 || _grade_rec_exec > 150)
 		throw Form::GradeTooLowException();
 }
+
 
 Form::Form(Form const &src):_name(src._name), _grade_rec_sign(src._grade_rec_sign), _grade_rec_exec(src._grade_rec_exec)
 {
@@ -103,10 +104,16 @@ const char *Form::NullParametr::what() const throw()
 {
 	return ("parametr is null");
 };
+
 const char *Form::isSigned::what() const throw()
 {
 	return ("Form is signed");
 };
+
+const char   *Form::errorForm::what() const throw()
+{
+	return ("Form cannot be used.");
+}
 
 void Form::beSigned(Bureaucrat burea)
 {
@@ -115,11 +122,42 @@ void Form::beSigned(Bureaucrat burea)
 		throw Form::isSigned();
 	}
 	if(&burea == nullptr || this == nullptr)
+	{
 		throw Form::NullParametr();
-	if(this->_grade_rec_sign > burea.getGrade())
+	}
+	if(this->_grade_rec_sign >= burea.getGrade())
 	{
 		this->_signed = true;
 	}
 	else
+	{
 		throw Form::GradeTooLowException();
+	}
+}
+
+int Form::beExec(Bureaucrat burea) const
+{
+	if(&burea == nullptr || this == nullptr)
+		throw Form::NullParametr();
+	if(this->_grade_rec_exec >= burea.getGrade())
+	{
+		return (1);
+	}
+	else
+	{
+		throw Form::GradeTooLowException();
+	}
+}
+
+void				Form::Action() const
+{
+	
+}
+
+void				Form::execute(Bureaucrat const & executor) const
+{
+	if(this->_signed == true && beExec(executor))
+		Action();
+	else
+		throw Form::errorForm();
 }
