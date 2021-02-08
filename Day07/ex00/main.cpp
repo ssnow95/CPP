@@ -6,11 +6,12 @@
 /*   By: ssnowbir <ssnowbir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 17:05:03 by ssnowbir          #+#    #+#             */
-/*   Updated: 2021/02/07 17:39:08 by ssnowbir         ###   ########.fr       */
+/*   Updated: 2021/02/08 12:09:59 by ssnowbir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "whatever.hpp"
+#include "Awesome.hpp"
 
 int main( void ) 
 {
@@ -49,6 +50,12 @@ int main( void )
 	std::cout << "min( ii, jj ) = " << ::min( ii, jj ) << std::endl;
 	std::cout << "max( ii, jj ) = " << ::max( ii, jj ) << std::endl;
 	
-	
+	Awesome z = 90;
+	Awesome w = 80;
+
+	::swap( z, w );
+	std::cout << "z = " << z << " w = " << w << std::endl;
+	std::cout << "min( z, w ) = " << ::min( z, w ) << std::endl;
+	std::cout << "max( z, w ) = " << ::max( z, w ) << std::endl;
 	return 0;
 }

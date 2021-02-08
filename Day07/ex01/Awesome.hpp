@@ -1,45 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   Awesome.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssnowbir <ssnowbir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/07 17:07:11 by ssnowbir          #+#    #+#             */
-/*   Updated: 2021/02/08 11:57:09 by ssnowbir         ###   ########.fr       */
+/*   Created: 2021/02/08 12:11:12 by ssnowbir          #+#    #+#             */
+/*   Updated: 2021/02/08 12:12:48 by ssnowbir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef AWESOME_HPP
+#define AWESOME_HPP
+
 #include <iostream>
-template <typename T>
 
-T max(T a, T b)
+class Awesome
 {
-	if(a > b)
-		return a;
-	else if(a == b || b > a)
-		return b;
-	return 0;
-}
-
-template <typename T>
-
-T min(T a, T b)
-{
-	if(a < b)
-		return a;
-	else if(a == b || b < a)
-		return b;
-	return 0;
-}
-
-template <typename T>
-
-void swap(T &a, T &b)
-{
-	T tmp;
-	
-	tmp = a;
-	a = b;
-	b = tmp;
-}
+	public:
+		Awesome( void ) : _n( 42 ) { return; }
+		int get( void ) const { return this->_n; }
+	private:
+		int _n;
+};
+std::ostream & operator<<( std::ostream & o, Awesome const & rhs ) { o << rhs.get(); return o; }
+#endif
