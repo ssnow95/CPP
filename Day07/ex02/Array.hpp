@@ -6,7 +6,7 @@
 /*   By: ssnowbir <ssnowbir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 12:28:48 by ssnowbir          #+#    #+#             */
-/*   Updated: 2021/02/08 14:56:48 by ssnowbir         ###   ########.fr       */
+/*   Updated: 2021/02/09 11:45:00 by ssnowbir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,17 @@ public:
 								delete []_array;
 							}
 						};
+	//-----------------------EXCEPTIONS----------------------------//
+
+	
+						class error: public  std::exception
+						{
+							const char *what() const throw()
+							{
+								return ("error");
+							};
+							
+						};
 
 	//-----------------------OPERATORS----------------------------//
 
@@ -78,7 +89,7 @@ public:
 						};
 						T & operator[](unsigned int i)     //2
 						{
-							if(i > this->_n)
+							if(i > this->_n || (i == _n && _n == 0))
 								throw Array::error();
 							else
 								return (this->_array[i]);
@@ -90,19 +101,6 @@ public:
 						{
 							return (this->_n);
 						}
-	
-	//-----------------------EXCEPTIONS----------------------------//
-
-	
-						class error: public  std::exception
-						{
-							const char *what() const throw()
-							{
-								return ("error");
-							};
-							
-						};
-
 };
 
 
